@@ -91,6 +91,9 @@ async def list_users(guild_id: int, num_entries: int) -> str:
             current_date
         ])
 
+    # Sort the table data by `current_time`
+    table_data.sort(key=lambda x: datetime.strptime(x[2], "%I:%M %p"))
+
     # Format the table with a fancy grid
     table = tabulate(
         table_data,
