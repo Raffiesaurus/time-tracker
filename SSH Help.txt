@@ -3,6 +3,8 @@ sudo apt install python3 python3-pip
 
 Import files, move it to folder
 
+mv functionality.py TimeTracker/
+
 cd, ls, rm
 
 cd /TimeTracker

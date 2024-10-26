@@ -1,15 +1,25 @@
 from datetime import datetime
 import pytz
 import discord
+import json
 from collections import OrderedDict
 from tabulate import tabulate
 
 server_data = {}
 
+# File path for saving the data
+DATA_FILE = "server_data.json"
+
+# Save data to JSON file
+def save_data():
+    with open(DATA_FILE, "w") as file:
+        # Convert OrderedDict to regular dictionary to save in JSON format
+        json.dump(server_data, file, default=dict)
+
 # Modify set_timezone to store per-server data
 async def set_timezone(author: discord.User, guild_id: int, timezone: str, country: str) -> str:
     """Sets the user's timezone and country, specific to their server (guild)."""
-    
+
     if not country:
         return f"{author.mention}, invalid country! Please mention a country or city after the timezone."
     
@@ -23,12 +33,15 @@ async def set_timezone(author: discord.User, guild_id: int, timezone: str, count
             "name": author.display_name,
             "timezone": timezone,
             "country": country,
-            "set_at": datetime.now()  # Timestamp to track when it was set
+            "set_at": datetime.now().isoformat()  # Use ISO format to store in JSON
         }
+        
+        # Save data to file after each update
+        save_data()
+        
         return f"{author.mention}, your timezone has been set to {timezone} ({country})."
     else:
         return f"{author.mention}, invalid timezone! Please refer to a list of IANA time zones."
-
 
 # Modify list_users to use fixed-width columns
 async def list_users(message: discord.Message, num_entries: int) -> str:
