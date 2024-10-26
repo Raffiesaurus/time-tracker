@@ -1,0 +1,37 @@
+sudo apt update
+sudo apt install python3 python3-pip
+
+Import files, move it to folder
+
+cd, ls, rm
+
+cd /TimeTracker
+
+python3 -m venv myenv - initially
+source myenv/bin/activate
+pip install -r requirements.txt
+
+python main.py
+
+
+sudo nano /etc/systemd/system/timetracker.service
+
+[Unit]
+Description=My Time Tracker App
+
+[Service]
+ExecStart=/home/raffiesaurus/TimeTracker/myenv/bin/python3 /home/raffiesaurus/TimeTracker/main.py
+WorkingDirectory=/home/raffiesaurus
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl enable timetracker.service
+sudo systemctl start timetracker.service
+sudo systemctl stop timetracker.service
+sudo systemctl status timetracker.service
+
+https://discord.com/oauth2/authorize?client_id=1299368165389897824&permissions=414464855040&integration_type=0&scope=bot
