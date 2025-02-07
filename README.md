@@ -1,6 +1,6 @@
 # Time Tracker Discord Bot
 
-![License](https://img.shields.io/github/license/Raffiesaurus/time-tracker)
+![License](https://img.shields.io/github/LICENSE/Raffiesaurus/time-tracker)
 ![Last Commit](https://img.shields.io/github/last-commit/Raffiesaurus/time-tracker)
 
 A Discord bot for tracking user time zones and checking the local time of other users in a server.
